@@ -39,3 +39,54 @@ Clone the repository and install the required Python dependencies:
 git clone [https://github.com/YourUsername/DefRecon.git](https://github.com/YourUsername/DefRecon.git)
 cd DefRecon
 pip install -r requirements.txt
+```
+
+### 💡 Usage
+
+```bash
+python3 DefRecon.py <url or host> [--verbose]
+```
+
+### 📊 Output
+
+Upon completion, DefRecon prints the results to the console and saves a detailed JSON file.
+
+The output is structured into key sections:
+
+scan_info: Metadata about the scan (target, timestamp, duration).
+
+components: An executive summary of all identified infrastructure, security layers, and technologies with a confidence level.
+
+detailed_signals: Raw and processed data collected from HTTP, Network, and Security modules.
+
+security.firewall: Detailed evidence, score, and certainty level from the multi-method Nmap analysis.
+
+security.waf: Detected vendors, blocking evidence from payload tests, and confidence.
+
+confidence_scores: A numerical confidence score (0.0 to 1.0) for key detections (firewall, waf).
+
+```bash
+Example JSON Snippet
+
+{
+  "scan_info": {
+    "target": "[https://example.com](https://example.com)",
+    "host": "example.com",
+    "timestamp": "...",
+    "scan_duration": "42.51s"
+  },
+  "components": [
+    {
+      "role": "CDN",
+      "vendor": "Cloudflare",
+      "confidence": "high"
+    },
+    {
+      "role": "Web Application Firewall",
+      "vendor": "Cloudflare",
+      "confidence": "high"
+    },
+    // ... other components
+  ],
+  // ... detailed_signals
+}
